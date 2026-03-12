@@ -8,6 +8,7 @@ export default antfu(
     rules: {
       'pnpm/yaml-enforce-settings': 'off',
       'e18e/ban-dependencies': 'off',
+      'test/no-import-node-test': 'off',
     },
   },
 )

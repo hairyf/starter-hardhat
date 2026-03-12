@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict'
+import { describe, it } from 'node:test'
 import { network } from 'hardhat'
-
-import { describe, it } from 'vitest'
 import Counter from '../ignition/modules/Counter'
 
 describe('counter', async () => {
