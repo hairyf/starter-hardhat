@@ -1,74 +1,38 @@
-import { HardhatUserConfig, task } from 'hardhat/config'
-import '@nomicfoundation/hardhat-toolbox'
-import '@nomicfoundation/hardhat-verify'
-import '@openzeppelin/hardhat-upgrades'
-import 'hardhat-deploy'
-import 'dotenv/config'
+import hardhatToolboxViemPlugin from '@nomicfoundation/hardhat-toolbox-viem'
+import { configVariable, defineConfig } from 'hardhat/config'
 
-const {
-  OWNER_PRIVATE_KEY_TESTNET,
-  OWNER_PRIVATE_KEY_MAINNET
-} = process.env as Record<string, string>
-
-const config: HardhatUserConfig = {
-  paths: { sources: './src' },
-  solidity: '0.8.20',
-  defaultNetwork: 'hardhat',
-  namedAccounts: {
-    deployer: { default: 0 },
-    owner: { default: 0 },
+export default defineConfig({
+  plugins: [hardhatToolboxViemPlugin],
+  solidity: {
+    profiles: {
+      default: {
+        version: '0.8.28',
+      },
+      production: {
+        version: '0.8.28',
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
+      },
+    },
   },
   networks: {
-    hardhat: {
-      chainId: 31337,
-      gasPrice: 875000000,
-      allowUnlimitedContractSize: true,
-      saveDeployments: true,
+    hardhatMainnet: {
+      type: 'edr-simulated',
+      chainType: 'l1',
     },
-    testnet: {
-      url: 'http://..',
-      chainId: 0,
-      accounts: [OWNER_PRIVATE_KEY_TESTNET],
-      saveDeployments: true,
-      allowUnlimitedContractSize: true,
+    hardhatOp: {
+      type: 'edr-simulated',
+      chainType: 'op',
     },
-    mainnet: {
-      url: 'http://..',
-      chainId: 0,
-      accounts: [OWNER_PRIVATE_KEY_MAINNET],
-      saveDeployments: true,
-      allowUnlimitedContractSize: true,
-      gas: 'auto',
-      gasPrice: 'auto',
+    sepolia: {
+      type: 'http',
+      chainType: 'l1',
+      url: configVariable('SEPOLIA_RPC_URL'),
+      accounts: [configVariable('SEPOLIA_PRIVATE_KEY')],
     },
   },
-  etherscan: {
-    apiKey: {
-      mainnet: ' ',
-      testnet: ' ',
-    },
-    customChains: [
-      {
-        network: 'mainnet',
-        chainId: 18686,
-        urls: {
-          apiURL: '..',
-          browserURL: '..',
-        },
-      },
-      {
-        network: 'testnet',
-        chainId: 5167003,
-        urls: {
-          apiURL: '..',
-          browserURL: '..',
-        },
-      },
-    ],
-  },
-  sourcify: {
-    enabled: false,
-  },
-}
-
-export default config
+})

@@ -1,15 +1,13 @@
+/* Based on https://github.com/tsconfig/bases/blob/501da2bcd640cf95c95805783e1012b992338f28/bases/node22.json */
 {
   "compilerOptions": {
-    "target": "es2021",
-    "baseUrl": ".",
-    "module": "commonjs",
-    "resolveJsonModule": true,
+    "target": "es2022",
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "strict": true,
+    "outDir": "dist",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipDefaultLibCheck": true,
     "skipLibCheck": true
-  },
-  "files": ["./hardhat.config.ts"],
-  "include": ["./test", "./deploy", "./scripts"]
+  }
 }
