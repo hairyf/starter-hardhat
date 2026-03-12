@@ -1,19 +1,30 @@
 {
-  "name": "evm",
+  "name": "starter-hardhat",
   "type": "module",
   "version": "1.0.0",
   "scripts": {
     "deploy:counter": "hardhat ignition deploy ignition/modules/Counter.ts",
     "compile": "hardhat compile",
-    "test": "hardhat test",
-    "test:node": "hardhat test node",
-    "test:sol": "hardhat test solidity"
+    "test": "hardhat test"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "catalog:cli",
+    "@antfu/ni": "catalog:cli",
     "@nomicfoundation/hardhat-ignition": "catalog:evm",
     "@nomicfoundation/hardhat-toolbox-viem": "catalog:evm",
+    "@types/node": "catalog:types",
+    "eslint": "catalog:cli",
     "forge-std": "catalog:evm",
     "hardhat": "catalog:evm",
+    "lint-staged": "catalog:cli",
+    "simple-git-hooks": "catalog:cli",
+    "typescript": "catalog:cli",
     "viem": "catalog:evm"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm i --frozen-lockfile --ignore-scripts --offline && npx lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
