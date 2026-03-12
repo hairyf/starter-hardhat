@@ -3,13 +3,17 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "deploy:counter": "hardhat ignition deploy ignition/modules/Counter.ts",
-    "compile": "hardhat compile",
-    "test": "hardhat test"
+    "deploy:price-feed": "lnv -- hardhat ignition deploy ignition/modules/PriceFeed.ts",
+    "compile": "lnv -- hardhat compile",
+    "test": "lnv -- hardhat test"
+  },
+  "dependencies": {
+    "@chainlink/contracts": "catalog:"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:cli",
     "@antfu/ni": "catalog:cli",
+    "@hairy/lnv": "catalog:",
     "@nomicfoundation/hardhat-ignition": "catalog:evm",
     "@nomicfoundation/hardhat-toolbox-viem": "catalog:evm",
     "@types/node": "catalog:types",

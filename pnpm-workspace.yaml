@@ -1,14 +1,12 @@
-catalogMode: prefer
-
-ignoreWorkspaceRootCheck: true
-
-shellEmulator: true
-
-trustPolicyExclude:
-  - undici-types@6.21.0
 packages:
   - packages/*
   - playground/*
+
+catalog:
+  '@chainlink/contracts': ^1.5.0
+  '@hairy/lnv': ^9.1.0
+
+catalogMode: prefer
 
 catalogs:
   cli:
@@ -26,3 +24,10 @@ catalogs:
     viem: ^2.46.3
   types:
     '@types/node': ^25.0.1
+
+ignoreWorkspaceRootCheck: true
+
+shellEmulator: true
+
+trustPolicyExclude:
+  - undici-types@6.21.0
